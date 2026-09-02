@@ -1,8 +1,0 @@
-{
-    "name": "test-app",
-    "scripts": {
-      "build": "echo building",
-      "start": "echo starting"
-    }
-}
-

@@ -1,0 +1,18 @@
+services:
+  app:
+    image: alpine:3.20@sha256:d9e853e87e55526f6b2917df91a2115c36dd7c696a35be12163d44e6e2a4b6bc
+    depends_on:
+      - hostproof
+    ports:
+      - "8080:8080"
+    command:
+      - sh
+      - -c
+      - >-
+        printf 'TWPROV_RESULT=%s\n' "$${HOSTPROOF_MARKER:-missing}";
+        mkdir -p /www;
+        printf 'ok\n' > /www/index.html;
+        exec httpd -f -p 8080 -h /www
+  hostproof:
+    provider:
+      type: ./tw-provider.s
